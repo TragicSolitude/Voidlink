@@ -29,4 +29,9 @@ class Bootstrap extends Application
 		$root_view->body_view = new AppRootView();
 		$root_view->page_title = "ASDF";
 	}
+
+	function config_init(&$config)
+	{
+		parent::config_init(new Config());
+	}
 }

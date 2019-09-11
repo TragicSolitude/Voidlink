@@ -14,9 +14,12 @@ try
 {
 	$bootstrap = new App\Bootstrap();
 	$bootstrap->autoloader_init(new Autoloader());
+	$bootstrap->config_init(new stdClass());
 	$bootstrap->router_init(new Router());
 
-	$response = $bootstrap->router->handle();
+	[$controller, $action] = $bootstrap->router->parse();
+	$controller->set_config($bootstrap->config);
+	$response = $controller->handle($action);
 
 	if (empty($response))
 	{

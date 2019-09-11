@@ -13,7 +13,7 @@ class IndexController extends Controller
 
 	function get_index()
 	{
-		return new IndexView();
+		return new IndexView($this->config->thing);
 	}
 
 	function get_test()

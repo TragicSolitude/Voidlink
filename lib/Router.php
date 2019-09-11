@@ -3,7 +3,7 @@ namespace Lib;
 
 class Router
 {
-	function handle()
+	function parse()
 	{
 		// Parse out route parameter hopefully given by mod_rewrite
 		$query = [];
@@ -21,15 +21,6 @@ class Router
 		$action = "{$method}_{$split[2]}";
 		$controller = new $controller_class();
 
-		if (!method_exists($controller, $action))
-		{
-			throw new HttpException(404);
-		}
-
-		$response = $controller->$action();
-
-		// TODO set headers and stuff based on controller variables
-
-		return $response;
+		return [$controller, $action];
 	}
 }

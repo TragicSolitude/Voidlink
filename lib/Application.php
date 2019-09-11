@@ -3,13 +3,19 @@ namespace Lib;
 
 abstract class Application
 {
-	public $router = NULL;
-	public $autoloader = NULL;
-	public $root_view = NULL;
+	public $router;
+	public $autoloader;
+	public $root_view;
+	public $config;
 
 	function autoloader_init(Autoloader &$autoloader)
 	{
 		$this->autoloader = $autoloader;
+	}
+
+	function config_init(&$config)
+	{
+		$this->config = $config;
 	}
 
 	function router_init(Router &$router)

@@ -3,8 +3,8 @@ namespace Lib;
 
 abstract class View
 {
-	protected static $scripts = [];
-	protected static $stylesheets = [];
+	private static $scripts = [];
+	private static $stylesheets = [];
 	public $children = [];
 
 	abstract function render();
@@ -19,6 +19,7 @@ abstract class View
 		foreach (View::$scripts as $script): ?>
 			<script src="<?= $script ?>"></script>
 		<?php endforeach;
+		View::$scripts = [];
 	}
 
 	protected function add_stylesheet($stylesheet)
@@ -31,5 +32,6 @@ abstract class View
 		foreach (View::$stylesheets as $stylesheet): ?>
 			<link rel="stylesheet" href="<?= $stylesheet ?>" />
 		<?php endforeach;
+		View::$stylesheets = [];
 	}
 }

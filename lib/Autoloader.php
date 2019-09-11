@@ -19,7 +19,7 @@ class Autoloader
 		$class_ns = implode("\\", $parts);
 		if (isset(self::$namespaces[$class_ns]))
 		{
-			include self::$namespaces[$class_ns]."/$class.php";
+			require self::$namespaces[$class_ns]."/$class.php";
 		}
 	}
 }
