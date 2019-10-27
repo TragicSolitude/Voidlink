@@ -7,24 +7,35 @@ abstract class Application
 	public $autoloader;
 	public $root_view;
 	public $config;
+    public $vm;
 
-	function autoloader_init(Autoloader &$autoloader)
+    function autoloader_init(): Autoloader
+    {
+        return new Autoloader();
+    }
+
+	function config_init(): object
 	{
-		$this->autoloader = $autoloader;
+        return new \stdClass();
 	}
 
-	function config_init(&$config)
+	function router_init(): Router
 	{
-		$this->config = $config;
+		return new Router();
 	}
 
-	function router_init(Router &$router)
-	{
-		$this->router = $router;
-	}
+    function view_base_path(): string
+    {
+        return "../app/views/";
+    }
 
-	function root_view_init(RootView &$root_view)
-	{
-		$this->root_view = $root_view;
-	}
+    function view_root(): string
+    {
+        return "root";
+    }
+
+    function vm_init(): ViewModel
+    {
+        return new ViewModel();
+    }
 }

@@ -5,40 +5,38 @@ include "../lib/Autoloader.php";
 include "../app/Bootstrap.php";
 
 use App\Exceptions\HttpException;
-use Lib\View;
-use Lib\RootView;
-use Lib\Router;
-use Lib\Autoloader;
 
 try
 {
 	$bootstrap = new App\Bootstrap();
-	$bootstrap->autoloader_init(new Autoloader());
-	$bootstrap->config_init(new stdClass());
-	$bootstrap->router_init(new Router());
+    $bootstrap->autoloader = $bootstrap->autoloader_init();
+    $bootstrap->router = $bootstrap->router_init();
+    $bootstrap->config = $bootstrap->config_init();
+    $bootstrap->vm = $bootstrap->vm_init();
 
-	[$controller, $action] = $bootstrap->router->parse();
-	$controller->set_config($bootstrap->config);
+	[$controller_class, $action] = $bootstrap->router->parse();
+    // TODO Convert to dynamic dependency injection
+    $controller = new $controller_class($bootstrap->config, $bootstrap->vm);
 	$response = $controller->handle($action);
 
-	if (empty($response))
+	if (gettype($response) === "string")
 	{
-		// What should happen here
-	}
-	else if ($response instanceof View)
-	{
-		$root_view = new RootView();
-		$bootstrap->root_view_init($root_view);
-		$root_view->body_view->children[] = $response;
+        // Restrict scope
+        $vm = $bootstrap->vm;
+        $viewpath = $bootstrap->view_base_path() . $response . ".php";
+        $scope = function () use ($vm, $viewpath) {
+            // Load view by path returned from action
+            require $viewpath;
+        };
 
-		echo $root_view->render();
+        // Initialize view tree
+        require $bootstrap->view_base_path() . $bootstrap->view_root() . ".php";
 	}
 	else
 	{
 		header("Content-Type: application/json");
 		echo json_encode($response);
 	}
-	// TODO handle some kind of response type for customizing headers and stuff
 }
 catch (HttpException $e)
 {

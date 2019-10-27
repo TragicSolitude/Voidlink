@@ -19,8 +19,8 @@ class Router
 		$controller_name = ucfirst($split[1]);
 		$controller_class = "App\\Controllers\\{$controller_name}Controller";
 		$action = "{$method}_{$split[2]}";
-		$controller = new $controller_class();
+		// $controller = new $controller_class();
 
-		return [$controller, $action];
+		return [$controller_class, $action];
 	}
 }

@@ -1,14 +1,17 @@
 <?php
 namespace Lib;
 
+use Lib\ViewModel;
+
 class Controller
 {
 	protected $config;
+    protected $vm;
 
-	function set_config($config)
-	{
-		$this->config = $config;
-	}
+    function __construct(object $config, ViewModel $vm) {
+        $this->config = $config;
+        $this->vm = $vm;
+    }
 
 	function handle(string $action)
 	{

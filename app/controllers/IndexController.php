@@ -2,18 +2,16 @@
 namespace App\Controllers;
 
 use Lib\Controller;
-use App\Views\IndexView;
 
 class IndexController extends Controller
 {
-	function __construct()
-	{
-
-	}
-
 	function get_index()
 	{
-		return new IndexView($this->config->thing);
+        $this->vm->page_title = "Voidlink";
+        $this->vm->add_script("test.js");
+        $this->vm->test = $this->config->thing;
+
+		return "index/index";
 	}
 
 	function get_test()
