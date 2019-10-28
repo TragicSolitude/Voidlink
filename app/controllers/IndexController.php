@@ -7,12 +7,24 @@ class IndexController extends Controller
 {
 	function get_index()
 	{
-        $this->vm->page_title = "Voidlink";
-        $this->vm->add_script("test.js");
-        $this->vm->test = $this->config->thing;
+        $this->vm->page_title = "Posts";
 
 		return "index/index";
 	}
+
+    function get_about()
+    {
+        $this->vm->page_title = "About Voidlink";
+
+        return "index/about";
+    }
+
+    function get_sitemap()
+    {
+        $this->vm->page_title = "Site Map";
+
+        return "index/sitemap";
+    }
 
 	function get_test()
 	{

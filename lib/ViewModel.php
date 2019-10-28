@@ -14,9 +14,10 @@ class ViewModel
         $this->page_title = "";
     }
 
-	public function add_script($script_name)
+	public function add_script($script_name): Self
 	{
 		$this->scripts[] = "/public/js/$script_name";
+        return $this;
 	}
 
 	public function scripts()
@@ -27,9 +28,10 @@ class ViewModel
 		$this->scripts = [];
 	}
 
-	public function add_stylesheet($stylesheet)
+	public function add_stylesheet($stylesheet): Self
 	{
-		$this->stylesheets[] = "/public/css/$stylesheet";
+        $this->stylesheets[] = "/public/css/$stylesheet";
+        return $this;
 	}
 
 	public function stylesheets()

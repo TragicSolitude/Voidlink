@@ -1,7 +1,7 @@
 <?php
-namespace App\Exceptions;
+namespace Lib;
 
-class HttpException extends Exception
+class HttpException extends \Exception
 {
 	public $code;
 

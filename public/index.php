@@ -4,8 +4,6 @@
 include "../lib/Autoloader.php";
 include "../app/Bootstrap.php";
 
-use App\Exceptions\HttpException;
-
 try
 {
 	$bootstrap = new App\Bootstrap();
@@ -13,6 +11,11 @@ try
     $bootstrap->router = $bootstrap->router_init();
     $bootstrap->config = $bootstrap->config_init();
     $bootstrap->vm = $bootstrap->vm_init();
+    // $bootstrap->pdo = $bootstrap->pdo_init();
+
+    // TODO change this to RepositoryFactory that gets injected into
+    // the controller
+    Lib\Repository::$pdo = $bootstrap->pdo;
 
 	[$controller_class, $action] = $bootstrap->router->parse();
     // TODO Convert to dynamic dependency injection
@@ -21,16 +24,33 @@ try
 
 	if (gettype($response) === "string")
 	{
-        // Restrict scope
-        $vm = $bootstrap->vm;
-        $viewpath = $bootstrap->view_base_path() . $response . ".php";
-        $scope = function () use ($vm, $viewpath) {
-            // Load view by path returned from action
-            require $viewpath;
-        };
+        [$action, $path] = explode(":", $response);
+        switch ($action)
+        {
+            case "redirect":
+                header("Location: $path");
+                http_response_code(302);
+                break;
+            case "see":
+                header("Location: $path");
+                http_response_code(303);
+                break;
+            default:
+                $basepath = $bootstrap->view_base_path();
+                $rootpath = $basepath . $bootstrap->view_root() . ".php";
 
-        // Initialize view tree
-        require $bootstrap->view_base_path() . $bootstrap->view_root() . ".php";
+                // Restrict scope
+                $vm = $bootstrap->vm;
+                $viewpath = $basepath . $action . ".php";
+                $scope = function () use ($vm, $viewpath) {
+                    // Load view by path returned from action
+                    require $viewpath;
+                };
+
+                // Initialize view tree
+                require $rootpath;
+                break;
+        }
 	}
 	else
 	{
@@ -38,11 +58,13 @@ try
 		echo json_encode($response);
 	}
 }
-catch (HttpException $e)
+catch (Lib\HttpException $e)
 {
 	$code = $e->code;
-	include "../app/exceptions/$code.php"
-		or include "../app/exceptions/generic.php";
+	if ((include "../app/exceptions/$code.php") === FALSE)
+    {
+		require "../app/exceptions/generic.php";
+    }
 }
 catch (Exception $e)
 {

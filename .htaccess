@@ -1,5 +1,4 @@
 <IfModule mod_rewrite.c>
-	RewriteEngine On
-	RewriteRule ^$ public/index/index [L]
-	RewriteRule ((?s).*) public/$1 [L]
+    RewriteEngine On
+    RewriteRule ^((?s).*)$ public/$1 [L]
 </IfModule>

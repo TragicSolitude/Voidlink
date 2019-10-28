@@ -5,9 +5,10 @@ class Autoloader
 {
 	public static $namespaces = ["Lib" => "../lib"];
 
-	function add_namespaces(array $map)
+	function add_namespaces(array $map): Self
 	{
-		self::$namespaces = array_merge(self::$namespaces, $map);
+        self::$namespaces = array_merge(self::$namespaces, $map);
+        return $this;
 	}
 
 	static function autoload(string $class_name)

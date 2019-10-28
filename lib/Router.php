@@ -9,18 +9,15 @@ class Router
 		$query = [];
 		parse_str($_SERVER["QUERY_STRING"], $query);
 
-		if (empty($query["r"]))
-		{
-			throw new HttpException(404);
-		}
-
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
 		$split = explode("/", $query["r"]);
-		$controller_name = ucfirst($split[1]);
-		$controller_class = "App\\Controllers\\{$controller_name}Controller";
-		$action = "{$method}_{$split[2]}";
-		// $controller = new $controller_class();
+        $controller = $split[1] ?: "index";
+        $action = $split[2] ?: "index";
 
-		return [$controller_class, $action];
+        $controller_name = ucfirst($controller);
+        $controller_class = "App\\Controllers\\{$controller_name}Controller";
+        $action_name = "{$method}_{$action}";
+
+        return [$controller_class, $action_name];
 	}
 }
