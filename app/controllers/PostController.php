@@ -10,7 +10,7 @@ class PostController extends Controller
     function get_new()
     {
         // TODO Make this into a centralized security service?
-        if (!$this->auth->is_logged_in())
+        if (!$this->auth->cur_user)
         {
             return "see:/login";
         }
@@ -24,7 +24,7 @@ class PostController extends Controller
 
     function post_create()
     {
-        if (!$this->auth->is_logged_in())
+        if (!$this->auth->cur_user)
         {
             return "see:/login";
         }
@@ -35,7 +35,7 @@ class PostController extends Controller
             return "go_back";
         }
 
-        PostRepository::create_post(1, $post);
+        PostRepository::create_post($this->auth->cur_user->id, $post);
         return "see:/";
     }
 }

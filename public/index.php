@@ -6,6 +6,8 @@ include "../app/Bootstrap.php";
 
 try
 {
+    session_start();
+
 	$bootstrap = new App\Bootstrap();
     $bootstrap->autoloader = $bootstrap->autoloader_init();
     $bootstrap->router = $bootstrap->router_init();

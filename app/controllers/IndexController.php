@@ -14,7 +14,7 @@ class IndexController extends Controller
 
     function get_about()
     {
-        $this->vm->page_title = "About Voidlink";
+        $this->vm->page_title = "About";
 
         return "index/about";
     }

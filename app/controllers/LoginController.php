@@ -11,7 +11,6 @@ class LoginController extends Controller
     {
         $this->vm->page_title = "Login";
         $this->vm->errors = $this->errors;
-        $this->vm->form = $_SESSION["form"];
 
         return "login/index";
     }
@@ -29,26 +28,22 @@ class LoginController extends Controller
             return "go_back";
         }
 
-        $userid = UserRepository::validate_login($login);
+        $user = UserRepository::validate_login($login);
 
-        if (is_null($userid))
+        if (is_null($user))
         {
             $this->errors[] = "Invalid Login";
             return "go_back";
         }
 
-        $this->auth->login($userid);
+        $this->auth->login($user);
 
         return "see:/";
     }
 
-    function post_dologout()
+    function get_dologout()
     {
-        if (!$this->auth->is_logged_in())
-        {
-            return "see:/";
-        }
-
+        // If not logged in then this does nothing
         $this->auth->logout();
 
         return "see:/";

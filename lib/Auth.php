@@ -1,21 +1,20 @@
 <?php
 namespace Lib;
 
+use App\Models\User;
+
 class Auth
 {
-    function userid()
+    public $cur_user;
+
+    function __construct()
     {
-        return $_SESSION['auth'];
+        $this->cur_user = unserialize($_SESSION['auth']) ?: null;
     }
 
-    function is_logged_in(): bool
+    function login(User $user)
     {
-        return isset($_SESSION['auth']);
-    }
-
-    function login(int $userid)
-    {
-        $_SESSION['auth'] = $userid;
+        $_SESSION['auth'] = serialize($user);
     }
 
     function logout()

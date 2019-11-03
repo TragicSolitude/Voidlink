@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use Lib\Repository;
 use App\Dto\LoginDto;
+use App\Models\User;
 
 class UserRepository extends Repository
 {
@@ -12,10 +13,10 @@ class UserRepository extends Repository
      * @param $login
      * @return The id of the user if successful or NULL on failure
      */
-    static function validate_login(LoginDto $login): int
+    static function validate_login(LoginDto $login): ?User
     {
         $sql = [
-            "SELECT id, username, password FROM user",
+            "SELECT * FROM user",
             "WHERE 1",
                 "AND username = :username"
         ];
@@ -26,18 +27,18 @@ class UserRepository extends Repository
             return NULL;
         }
 
-        $user = $st->fetch(\PDO::FETCH_ASSOC);
+        $user = $st->fetchObject("App\\Models\\User");
         if (!$user)
         {
             return NULL;
         }
 
-        if (!password_verify($login->password, $user['password']))
+        if (!password_verify($login->password, $user->password))
         {
             return NULL;
         }
 
-        return $user['id'];
+        return $user;
     }
 
     // static function register_user(RegistrationDto $registration): int

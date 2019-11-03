@@ -12,12 +12,13 @@ class Controller
     protected $errors;
 
     function __construct(object $config, ViewModel $vm, Auth $auth) {
-        session_start();
-
         $this->config = $config;
         $this->vm = $vm;
         $this->auth = $auth;
         $this->errors = $_SESSION['errors'] ?: [];
+
+        $this->vm->cur_user = $auth->cur_user;
+        $this->vm->form = $_SESSION["form"];
     }
 
 	function handle(string $action)

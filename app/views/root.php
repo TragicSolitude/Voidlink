@@ -1,11 +1,19 @@
 <?php
     $pages = [
-        "Login" => "/login",
         "New Post" => "/post/new",
         "Posts" => "/",
         "Site Map" => "/index/sitemap",
         "About" => "/index/about"
     ];
+
+    if ($vm->cur_user)
+    {
+        $pages = array_merge(["Logout" => "/login/dologout"], $pages);
+    }
+    else
+    {
+        $pages = array_merge(["Login" => "/login"], $pages);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,14 +30,14 @@
             </a>
         </h1>
         <?php if (!empty($vm->cur_user)): ?>
-        <div id="logged-in-user"></div>
-        <?php else: ?>
-        <div id="log-in"></div>
+        <div id="logged-in-user">
+            Welcome <?= $vm->cur_user->username ?>.
+        </div>
         <?php endif; ?>
         <nav>
             <?php foreach ($pages as $name => $route):
                 $aclass = "";
-                if ($current_page === $name)
+                if ($vm->page_title === $name)
                 {
                     $aclass = "active-page";
                 } ?>
