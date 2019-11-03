@@ -8,6 +8,7 @@ abstract class Application
 	public $root_view;
 	public $config;
     public $vm;
+    public $auth;
 
     function autoloader_init(): Autoloader
     {
@@ -41,6 +42,14 @@ abstract class Application
 
     function pdo_init(): \PDO
     {
-        return new \PDO("mysql:dbname=app;host=127.0.0.1", "root", "");
+        $pdo = new \PDO("mysql:dbname=app;host=127.0.0.1", "root", "");
+        $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+        return $pdo;
+    }
+
+    function auth_init(): Auth
+    {
+        return new Auth();
     }
 }

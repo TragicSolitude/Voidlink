@@ -34,4 +34,9 @@ class Bootstrap extends Application
         return parent::vm_init()
             ->add_stylesheet("main.css");
     }
+
+    function pdo_init(): \PDO
+    {
+        return new \PDO("mysql:dbname=voidlink;host=db", "root", "");
+    }
 }

@@ -13,6 +13,11 @@
             Upload Image
         </button>
     </div>
+    <div class="errors">
+    <?php foreach ($vm->errors as $error): ?>
+        <p class="error"><?= $error ?></p>
+    <?php endforeach; ?>
+    </div>
     <div class="form-action">
         <button class="form-button-primary" type="submit">Submit</button>
         <a class="form-button" href="/">Cancel</a>

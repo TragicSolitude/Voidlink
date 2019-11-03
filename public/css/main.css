@@ -122,6 +122,15 @@
 	max-width: 30em;
 }
 
+.theme-default form .errors {
+    margin-top: 1em;
+}
+
+.theme-default form .errors .error {
+    color: #c00;
+    margin: 0;
+}
+
 .theme-default .form-group .form-label {
 	font-size: 1.25em;
 	margin: 1em 0 0.25em;

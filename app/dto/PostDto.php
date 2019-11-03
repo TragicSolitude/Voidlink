@@ -1,17 +1,29 @@
 <?php
 namespace App\Dto;
 
-class PostDto extends Lib\Dto
+use Lib\Dto;
+
+class PostDto extends Dto
 {
     public $content;
 
     function __construct()
     {
-        $this->content = filter_input(INPUT_POST, "content", FILTER_SANITIZE_STRING);
+        $this->content = filter_input(
+            INPUT_POST,
+            "content",
+            FILTER_SANITIZE_STRING
+        );
     }
 
-    function is_valid(): bool
+    function is_invalid(array &$errors): bool
     {
-        return parent::is_valid(['content']);
+        $_SESSION["form"] = $_POST;
+        if (is_null($this->content))
+        {
+            $errors[] = "Content is required";
+        }
+
+        return count($errors) > 0;
     }
 }

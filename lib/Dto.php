@@ -1,17 +1,7 @@
 <?php
 namespace Lib;
 
-class Dto
+abstract class Dto
 {
-    function is_valid(array $fields): bool
-    {
-        foreach ($fields as $field)
-        {
-            if ($this->field === FALSE)
-            {
-                return false;
-            }
-            return true;
-        }
-    }
+    abstract function is_invalid(array &$errors): bool;
 }

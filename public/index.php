@@ -11,7 +11,8 @@ try
     $bootstrap->router = $bootstrap->router_init();
     $bootstrap->config = $bootstrap->config_init();
     $bootstrap->vm = $bootstrap->vm_init();
-    // $bootstrap->pdo = $bootstrap->pdo_init();
+    $bootstrap->pdo = $bootstrap->pdo_init();
+    $bootstrap->auth = $bootstrap->auth_init();
 
     // TODO change this to RepositoryFactory that gets injected into
     // the controller
@@ -19,7 +20,11 @@ try
 
 	[$controller_class, $action] = $bootstrap->router->parse();
     // TODO Convert to dynamic dependency injection
-    $controller = new $controller_class($bootstrap->config, $bootstrap->vm);
+    $controller = new $controller_class(
+        $bootstrap->config,
+        $bootstrap->vm,
+        $bootstrap->auth
+    );
 	$response = $controller->handle($action);
 
 	if (gettype($response) === "string")
@@ -35,6 +40,10 @@ try
                 header("Location: $path");
                 http_response_code(303);
                 break;
+            case "go_back":
+                $back = $_SERVER['HTTP_REFERER'] ?: "/";
+                header("Location: $back");
+                http_response_code(303);
             default:
                 $basepath = $bootstrap->view_base_path();
                 $rootpath = $basepath . $bootstrap->view_root() . ".php";
@@ -57,6 +66,8 @@ try
 		header("Content-Type: application/json");
 		echo json_encode($response);
 	}
+
+    $controller->shutdown();
 }
 catch (Lib\HttpException $e)
 {

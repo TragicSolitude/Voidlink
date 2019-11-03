@@ -2,15 +2,22 @@
 namespace Lib;
 
 use Lib\ViewModel;
+use Lib\Auth;
 
 class Controller
 {
 	protected $config;
     protected $vm;
+    protected $auth;
+    protected $errors;
 
-    function __construct(object $config, ViewModel $vm) {
+    function __construct(object $config, ViewModel $vm, Auth $auth) {
+        session_start();
+
         $this->config = $config;
         $this->vm = $vm;
+        $this->auth = $auth;
+        $this->errors = $_SESSION['errors'] ?: [];
     }
 
 	function handle(string $action)
@@ -22,8 +29,29 @@ class Controller
 
 		$response = $this->$action();
 
-		// TODO set headers and stuff based on controller variables
+        if (count($this->errors) > 0)
+        {
+            if (!isset($_SESSION['errors']))
+            {
+                $_SESSION['errors'] = [];
+            }
+
+            $_SESSION['errors'] = array_merge(
+                $_SESSION['errors'],
+                $this->errors
+            );
+        }
 
 		return $response;
 	}
+
+    function shutdown()
+    {
+        // Cleanup session
+        if (session_status() === PHP_SESSION_ACTIVE)
+        {
+            unset($_SESSION['errors']);
+            unset($_SESSION['form']);
+        }
+    }
 }
