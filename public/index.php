@@ -16,9 +16,7 @@ try
     $bootstrap->pdo = $bootstrap->pdo_init();
     $bootstrap->auth = $bootstrap->auth_init();
 
-    // TODO change this to RepositoryFactory that gets injected into
-    // the controller
-    Lib\Repository::$pdo = $bootstrap->pdo;
+    Lib\Dao::$pdo = $bootstrap->pdo;
 
 	[$controller_class, $action] = $bootstrap->router->parse();
     // TODO Convert to dynamic dependency injection

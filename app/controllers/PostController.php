@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 use App\Dto\PostDto;
-use App\Repositories\PostRepository;
+use App\Dao\PostDao;
 use Lib\Controller;
 
 class PostController extends Controller
@@ -35,7 +35,7 @@ class PostController extends Controller
             return "go_back";
         }
 
-        PostRepository::create_post($this->auth->cur_user->id, $post);
+        PostDao::create_post($this->auth->cur_user->id, $post);
         return "see:/";
     }
 }

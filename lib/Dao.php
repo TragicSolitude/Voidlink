@@ -1,8 +1,7 @@
 <?php
 namespace Lib;
 
-class Repository
+class Dao
 {
     static public $pdo;
-    // static protected $table;
 }

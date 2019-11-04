@@ -1,10 +1,10 @@
 <?php
-namespace App\Repositories;
+namespace App\Dao;
 
-use Lib\Repository;
+use Lib\Dao;
 use App\Dto\PostDto;
 
-class PostRepository extends Repository
+class PostDao extends Dao
 {
     static function create_post(int $author_id, PostDto $post)
     {

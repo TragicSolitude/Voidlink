@@ -9,7 +9,10 @@ class Auth
 
     function __construct()
     {
-        $this->cur_user = unserialize($_SESSION['auth']) ?: null;
+        $this->cur_user = unserialize(
+            $_SESSION['auth'],
+            ["allowed_classes" => ["App\\Models\\User"]]
+        ) ?: null;
     }
 
     function login(User $user)

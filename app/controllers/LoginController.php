@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use Lib\Controller;
 use App\Dto\LoginDto;
-use App\Repositories\UserRepository;
+use App\Dao\UserDao;
 
 class LoginController extends Controller
 {
@@ -28,7 +28,7 @@ class LoginController extends Controller
             return "go_back";
         }
 
-        $user = UserRepository::validate_login($login);
+        $user = UserDao::validate_login($login);
 
         if (is_null($user))
         {

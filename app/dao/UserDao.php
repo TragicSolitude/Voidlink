@@ -1,11 +1,11 @@
 <?php
-namespace App\Repositories;
+namespace App\Dao;
 
-use Lib\Repository;
+use Lib\Dao;
 use App\Dto\LoginDto;
 use App\Models\User;
 
-class UserRepository extends Repository
+class UserDao extends Dao
 {
     /**
      * Validate the given login dto with the database.

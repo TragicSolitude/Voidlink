@@ -17,7 +17,7 @@ class Bootstrap extends Application
                 "App\Views" => "../app/views",
                 "App\Dto" => "../app/dto",
                 "App\Models" => "../app/models",
-                "App\Repositories" => "../app/repositories",
+                "App\Dao" => "../app/dao",
                 "App\Exceptions" => "../app/exceptions",
                 "App\Config" => "../app/config"
             ]);
