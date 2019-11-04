@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-use App\Config\DevConfig;
+use App\Config\Config;
 use Lib\Application;
 use Lib\Autoloader;
 use Lib\ViewModel;
@@ -25,8 +25,8 @@ class Bootstrap extends Application
 
 	function config_init(): object
 	{
-        // Swap out configs based on current environment
-        return new DevConfig();
+        // TODO Swap out configs based on current environment
+        return new Config();
 	}
 
     function vm_init(): ViewModel
@@ -37,6 +37,10 @@ class Bootstrap extends Application
 
     function pdo_init(): \PDO
     {
-        return new \PDO("mysql:dbname=voidlink;host=db", "root", "");
+        return new \PDO(
+            $this->config->db_url,
+            $this->config->db_username,
+            $this->config->db_password
+        );
     }
 }
