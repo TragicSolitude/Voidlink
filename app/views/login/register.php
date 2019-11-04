@@ -47,7 +47,7 @@
     <?php endforeach; ?>
     </div>
     <div class="form-action">
-        <button class="form-button primary" type="submit">Login</button>
+        <button class="form-button primary" type="submit">Register</button>
         <a class="form-button" href="/">Cancel</a>
     </div>
 </form>

@@ -73,6 +73,6 @@ class LoginController extends Controller
             return "go_back";
         }
 
-        return "see:/";
+        return "see:/login";
     }
 }
