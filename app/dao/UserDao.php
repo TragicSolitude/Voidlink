@@ -3,6 +3,7 @@ namespace App\Dao;
 
 use Lib\Dao;
 use App\Dto\LoginDto;
+use App\Dto\RegisterDto;
 use App\Models\User;
 
 class UserDao extends Dao
@@ -41,13 +42,43 @@ class UserDao extends Dao
         return $user;
     }
 
-    // static function register_user(RegistrationDto $registration): int
-    // {
-        // $sql = [
-            // "INSERT INTO user (email, username, password)",
-                // "VALUES (:email, :username, :password"
-        // ];
+    static function is_username_available(string $username): bool
+    {
+        $count = 0;
 
-        // return 0;
-    // }
+        $sql = [
+            "SELECT COUNT(1) AS count FROM user",
+            "WHERE username = :username"
+        ];
+        $st = self::$pdo->prepare(implode(" ", $sql));
+        $st->bindValue(":username", $username);
+        $st->bindColumn("count", $count, \PDO::PARAM_INT);
+        if (!$st->execute())
+        {
+            return false;
+        }
+
+        $st->fetch(\PDO::FETCH_BOUND);
+        return $count === 0;
+    }
+
+    static function register_user(RegisterDto $registration): bool
+    {
+        // DB Column is 60 wide specifically for Bcrypt hash
+        $hash = password_hash(
+            $registration->password,
+            PASSWORD_BCRYPT,
+            ["cost" => 12]
+        );
+
+        $sql = [
+            "INSERT INTO user (email, username, password, role)",
+                "VALUES (:email, :username, :password, 1)"
+        ];
+        $st = self::$pdo->prepare(implode(" ", $sql));
+        $st->bindValue(":email", $registration->email);
+        $st->bindValue(":username", $registration->username);
+        $st->bindValue(":password", $hash);
+        return $st->execute();
+    }
 }

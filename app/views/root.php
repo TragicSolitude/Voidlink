@@ -31,7 +31,7 @@
         </h1>
         <?php if (!empty($vm->cur_user)): ?>
         <div id="logged-in-user">
-            Welcome <?= $vm->cur_user->username ?>.
+            Welcome <?= $vm->cur_user->username ?>
         </div>
         <?php endif; ?>
         <nav>

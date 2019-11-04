@@ -4,6 +4,7 @@ namespace App\Controllers;
 use Lib\Controller;
 use App\Dto\LoginDto;
 use App\Dao\UserDao;
+use App\Dto\RegisterDto;
 
 class LoginController extends Controller
 {
@@ -13,11 +14,6 @@ class LoginController extends Controller
         $this->vm->errors = $this->errors;
 
         return "login/index";
-    }
-
-    function get_register()
-    {
-
     }
 
     function post_dologin()
@@ -49,8 +45,34 @@ class LoginController extends Controller
         return "see:/";
     }
 
+    function get_register()
+    {
+        $this->vm->page_title = "Register";
+        $this->vm->errors = $this->errors;
+
+        return "login/register";
+    }
+
     function post_doregister()
     {
+        $login = new RegisterDto();
+        if ($login->is_invalid($this->errors))
+        {
+            return "go_back";
+        }
 
+        if (!UserDao::is_username_available($login->username))
+        {
+            $this->errors[] = "Username already taken";
+            return "go_back";
+        }
+
+        if (!UserDao::register_user($login))
+        {
+            $this->errors[] = "Unknown error occurred";
+            return "go_back";
+        }
+
+        return "see:/";
     }
 }

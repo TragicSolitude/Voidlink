@@ -218,3 +218,8 @@
 .theme-default .indent.level-1 {
 	margin-left: 2em;
 }
+
+.theme-default .indent.level-2 {
+    margin-left: 4em;
+}
+}

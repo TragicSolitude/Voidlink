@@ -27,7 +27,8 @@ class PostDao extends Dao
     {
         $sql = [
             "SELECT",
-                "post.*",
+                "post.content,",
+                "post.created,",
                 "user.username AS author",
             "FROM post",
             "JOIN user ON user.id = post.author",
@@ -42,6 +43,6 @@ class PostDao extends Dao
             return [];
         }
 
-        return $st->fetchAll(\PDO::FETCH_CLASS, "Post");
+        return $st->fetchAll(\PDO::FETCH_CLASS, "App\\Models\\Post");
     }
 }

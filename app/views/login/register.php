@@ -1,5 +1,14 @@
 <h1 class="page-title"><?= $vm->page_title ?></h1>
-<form method="POST" action="/login/dologin" id="login-form">
+<form method="POST" action="/login/doregister" id="login-form">
+    <div class="form-group">
+        <span class="form-label">Email</span>
+        <input
+                name="email"
+                type="text"
+                class="form-control"
+                value="<?= $vm->form["email"] ?>" />
+        <p>This is only used for correspondance and is not shared</p>
+    </div>
     <div class="form-group">
         <span class="form-label">Username</span>
         <input
@@ -16,9 +25,14 @@
                 class="form-control"
                 value="<?= $vm->form["password"] ?>" />
     </div>
-    <p>
-        Don't have an account? <a href="/login/register">Register now</a>
-    </p>
+    <div class="form-group">
+        <span class="form-label">Confirm Password</span>
+        <input
+                name="confirmpassword"
+                type="password"
+                class="form-control"
+                value="<?= $vm->form["confirmpassword"] ?>" />
+    </div>
     <div class="errors">
     <?php foreach ($vm->errors as $error): ?>
         <p class="error"><?= $error ?></p>
@@ -29,3 +43,4 @@
         <a class="form-button" href="/">Cancel</a>
     </div>
 </form>
+
