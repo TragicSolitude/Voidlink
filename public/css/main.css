@@ -142,6 +142,12 @@
 	display: block;
 }
 
+.theme-default .form-group .form-label.required::after {
+    content: '*';
+    color: #c00;
+    margin-left: 0.25em;
+}
+
 .theme-default .form-group input.form-control {
 	width: 100%;
 	border: none;
@@ -221,5 +227,4 @@
 
 .theme-default .indent.level-2 {
     margin-left: 4em;
-}
 }
