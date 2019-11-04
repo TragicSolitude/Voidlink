@@ -3,17 +3,19 @@ namespace App\Dao;
 
 use Lib\Dao;
 use App\Dto\PostDto;
+use App\Models\User;
 
 class PostDao extends Dao
 {
-    static function create_post(int $author_id, PostDto $post)
+    static function create_post(User $author, PostDto $post)
     {
         $sql = [
-            "INSERT INTO post (author, content)",
-                "VALUES (:author, :content)"
+            "INSERT INTO post (author, author_name, content)",
+                "VALUES (:author, :author_name, :content)"
         ];
         $st = self::$pdo->prepare(implode(" ", $sql));
-        $st->bindValue(":author", $author_id, \PDO::PARAM_INT);
+        $st->bindValue(":author", $author->id, \PDO::PARAM_INT);
+        $st->bindValue(":author_name", $author->username);
         $st->bindValue(":content", $post->content);
         $st->execute();
     }
@@ -26,12 +28,8 @@ class PostDao extends Dao
     static function get_posts(int $count = 25, int $offset = 0): array
     {
         $sql = [
-            "SELECT",
-                "post.content,",
-                "post.created,",
-                "user.username AS author",
+            "SELECT *",
             "FROM post",
-            "JOIN user ON user.id = post.author",
             "ORDER BY created",
             "LIMIT :offset, :count"
         ];

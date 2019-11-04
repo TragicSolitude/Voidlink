@@ -1,7 +1,7 @@
 <?php foreach ($vm->posts as $post): ?>
 <div class="post">
     <p class="post-meta">
-        <?= $post->relative_time ?> by <?= $post->author ?>
+        <?= $post->relative_time ?> by <?= $post->author_name ?>
     </p>
     <p class="post-content"><?= htmlspecialchars($post->content) ?></p>
 	<div class="post-thumbnails">

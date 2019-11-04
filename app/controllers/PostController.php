@@ -35,7 +35,7 @@ class PostController extends Controller
             return "go_back";
         }
 
-        PostDao::create_post($this->auth->cur_user->id, $post);
+        PostDao::create_post($this->auth->cur_user, $post);
         return "see:/";
     }
 }

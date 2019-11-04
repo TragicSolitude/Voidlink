@@ -12,7 +12,7 @@ class Auth
         $this->cur_user = unserialize(
             $_SESSION['auth'],
             ["allowed_classes" => ["App\\Models\\User"]]
-        ) ?: null;
+        );
     }
 
     function login(User $user)

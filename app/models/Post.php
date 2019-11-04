@@ -7,6 +7,7 @@ class Post extends Model
 {
     public $id;
     public $author;
+    public $author_name;
     public $content;
     public $created;
 }

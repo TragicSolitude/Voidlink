@@ -22,7 +22,7 @@ class IndexController extends Controller
 
         $diff = time() - $ts;
         $day_diff = floor($diff / 86400);
-        if ($day_diff === 0)
+        if ($day_diff < 1)
         {
             if ($diff < 60) return "Just now";
             if ($diff < 3600) return floor($diff / 60)."m ago";
