@@ -10,7 +10,8 @@ class Router
 		parse_str($_SERVER["QUERY_STRING"], $query);
 
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
-		$split = explode("/", $query["r"]);
+		// $split = explode("/", $query["r"]);
+        $split = explode("/", $_SERVER["REQUEST_URI"]);
         $controller = $split[1] ?: "index";
         $action = $split[2] ?: "index";
 
