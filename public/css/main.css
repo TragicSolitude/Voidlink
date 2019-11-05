@@ -49,6 +49,9 @@
     height: 1.5em;
     display: inline-block;
     vertical-align: middle;
+}
+
+.theme-default #logged-in-user img + span {
     margin-left: 0.5em;
 }
 
