@@ -265,3 +265,7 @@
 .theme-default .indent.level-2 {
     margin-left: 4em;
 }
+
+.theme-default .accent {
+    color: #f44;
+}

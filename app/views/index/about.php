@@ -1,39 +1,23 @@
 <h1 class="page-title"><?= $vm->page_title ?></h1>
 
 <p class="text-block">
-That other text? Sadly, it’s no longer a 10.
+Voidlink is like Reddit but with more <span class="accent">red</span>, more
+anonymity, and less features. Apple is a deep inspiration for this creation,
+they have really shown that less <em>is</em> more and removing features that
+every website has had for ages is just more elegant. So almost every feature
+from Reddit has been stripped out to make sure this website is the absolute
+best it can be.
 </p>
 
 <p class="text-block">
-All of the words in Lorem Ipsum have flirted with me - consciously or
-unconsciously. That's to be expected. Trump Ipsum is calling for a total and
-complete shutdown of Muslim text entering your website. Look at that text!
-Would anyone use that? Can you imagine that, the text of your next webpage?! An
-'extremely credible source' has called my office and told me that Lorem Ipsum's
-birth certificate is a fraud. I will write some great placeholder text – and
-nobody writes better placeholder text than me, believe me – and I’ll write it
-very inexpensively. I will write some great, great text on your website’s
-Southern border, and I will make Google pay for that text. Mark my words.
+&quot;Wait what do you mean <em>more anonymity?</em>&quot;
 </p>
 
 <p class="text-block">
-Does everybody know that pig named Lorem Ipsum? She's a disgusting pig, right?
-Be careful, or I will spill the beans on your placeholder text. Lorem Ipsum is
-the single greatest threat. We are not - we are not keeping up with other
-websites. Lorem Ipsum best not make any more threats to your website. It will
-be met with fire and fury like the world has never seen.
-</p>
-
-<p class="text-block">
-Lorem Ipsum's father was with Lee Harvey Oswald prior to Oswald's being, you
-know, shot.
-</p>
-
-<p class="text-block">
-The other thing with Lorem Ipsum is that you have to take out its family. This
-placeholder text is gonna be HUGE. Lorem Ipsum best not make any more threats
-to your website. It will be met with fire and fury like the world has never
-seen. You could see there was text coming out of her eyes, text coming out of
-her wherever. My placeholder text, I think, is going to end up being very good
-with women.
+More anonymity means exactly that. Go nuts! Voidlink requires an email for
+registration and does absolutely nothing with it. It doesn't even have to be
+unique! You might ask, &quot;why require an email address at all then?&quot;
+That's because every other website you sign up for requires an email address
+and there's no need for a website like this to make you feel uncomfortable by
+<em>not</em> requiring that.
 </p>
