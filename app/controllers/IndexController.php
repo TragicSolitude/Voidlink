@@ -1,7 +1,6 @@
 <?php
 namespace App\Controllers;
 
-use App\Dao\ImageDao;
 use App\Dao\PostDao;
 use App\Dto\PostListDto;
 use Lib\Controller;
@@ -34,6 +33,9 @@ class IndexController extends Controller
         return date("F Y", $ts);
     }
 
+    /**
+     * GET / or /index/index
+     */
 	function get_index()
 	{
         $query = new PostListDto();
@@ -51,6 +53,9 @@ class IndexController extends Controller
 		return "index/index";
 	}
 
+    /**
+     * GET /about
+     */
     function get_about()
     {
         $this->vm->page_title = "About";
@@ -58,6 +63,9 @@ class IndexController extends Controller
         return "index/about";
     }
 
+    /**
+     * GET /sitemap
+     */
     function get_sitemap()
     {
         $this->vm->page_title = "Site Map";

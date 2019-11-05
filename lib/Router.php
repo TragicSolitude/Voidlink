@@ -1,6 +1,9 @@
 <?php
 namespace Lib;
 
+/**
+ * Routes custom url format to the correct controller and action
+ */
 class Router
 {
 	function parse()

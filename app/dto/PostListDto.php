@@ -3,6 +3,9 @@ namespace App\Dto;
 
 use Lib\Dto;
 
+/**
+ * Validates query string parameters for post list on index page
+ */
 class PostListDto extends Dto
 {
     public $page;

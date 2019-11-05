@@ -1,6 +1,10 @@
 <?php
 namespace Lib;
 
+/**
+ * Autoloads files based on a namespace => path mapping that can be extended
+ * and configured.
+ */
 class Autoloader
 {
 	public static $namespaces = ["Lib" => "../lib"];

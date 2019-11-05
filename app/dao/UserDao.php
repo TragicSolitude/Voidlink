@@ -9,7 +9,7 @@ use App\Models\User;
 class UserDao extends Dao
 {
     /**
-     * Validate the given login dto with the database.
+     * Validate the given login dto against the database.
      *
      * @param $login
      * @return The id of the user if successful or NULL on failure
@@ -42,10 +42,16 @@ class UserDao extends Dao
         return $user;
     }
 
+    /**
+     * Checks if a username is available to use
+     */
     static function is_username_available(string $username): bool
     {
         $count = 0;
 
+        // Is there some way to specifically catch index related errors from
+        // pdo? It would remove the need for this function and would be more
+        // reliable than this LBYL check.
         $sql = [
             "SELECT COUNT(1) AS count FROM user",
             "WHERE username = :username"
@@ -62,6 +68,11 @@ class UserDao extends Dao
         return $count === 0;
     }
 
+    /**
+     * Registers a new user
+     *
+     * @return True if successful
+     */
     static function register_user(RegisterDto $registration, ?string $uuid = null): bool
     {
         // DB Column is 60 wide specifically for Bcrypt hash

@@ -4,6 +4,9 @@ namespace Lib;
 use Lib\ViewModel;
 use Lib\Auth;
 
+/**
+ * Base controller and the main functionality entrypoint for the application
+ */
 class Controller
 {
 	protected $config;
@@ -21,6 +24,9 @@ class Controller
         $this->vm->form = $_SESSION["form"];
     }
 
+    /**
+     * Handles a request and coordinates error handling
+     */
 	function handle(string $action)
 	{
 		if (!method_exists($this, $action))
@@ -46,9 +52,11 @@ class Controller
 		return $response;
 	}
 
+    /**
+     * Clean up session
+     */
     function shutdown()
     {
-        // Cleanup session
         if (session_status() === PHP_SESSION_ACTIVE)
         {
             unset($_SESSION['errors']);

@@ -9,6 +9,9 @@ use App\Dao\ImageDao;
 
 class LoginController extends Controller
 {
+    /**
+     * GET /login or /login/index
+     */
     function get_index()
     {
         $this->vm->page_title = "Login";
@@ -17,6 +20,9 @@ class LoginController extends Controller
         return "login/index";
     }
 
+    /**
+     * POST /login/dologin
+     */
     function post_dologin()
     {
         $login = new LoginDto();
@@ -38,6 +44,12 @@ class LoginController extends Controller
         return "see:/";
     }
 
+    /**
+     * GET /login/dologout
+     *
+     * This is a GET route instead of POST like the other so that a simple <a>
+     * tag to this route can be tossed wherever instead of a full <form>
+     */
     function get_dologout()
     {
         // If not logged in then this does nothing
@@ -46,6 +58,9 @@ class LoginController extends Controller
         return "see:/";
     }
 
+    /**
+     * GET /login/register
+     */
     function get_register()
     {
         $this->vm->page_title = "Register";
@@ -54,6 +69,9 @@ class LoginController extends Controller
         return "login/register";
     }
 
+    /**
+     * POST /login/doregister
+     */
     function post_doregister()
     {
         $login = new RegisterDto();
@@ -62,6 +80,7 @@ class LoginController extends Controller
             return "go_back";
         }
 
+        // Make sure username is unique. Don't care about email uniqueness
         if (!UserDao::is_username_available($login->username))
         {
             $this->errors[] = "Username already taken";
@@ -71,6 +90,7 @@ class LoginController extends Controller
         $uuid = null;
         if (isset($_FILES["profilepic"]) && !empty($_FILES["profilepic"]["tmp_name"]))
         {
+            // If a file was uploaded validate it and save it
             $file = $_FILES["profilepic"];
             if (!exif_imagetype($file["tmp_name"]))
             {
@@ -86,12 +106,14 @@ class LoginController extends Controller
             }
         }
 
+        // Create a new user with the given information
         if (!UserDao::register_user($login, $uuid))
         {
             $this->errors[] = "Unknown error occurred";
             return "go_back";
         }
 
+        // Redirect to login page
         return "see:/login";
     }
 }

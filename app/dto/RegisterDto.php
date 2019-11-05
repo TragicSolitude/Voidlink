@@ -3,6 +3,9 @@ namespace App\Dto;
 
 use Lib\Dto;
 
+/**
+ * Parse and validate registration form entry
+ */
 class RegisterDto extends Dto
 {
     public $email;

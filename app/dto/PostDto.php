@@ -3,8 +3,13 @@ namespace App\Dto;
 
 use Lib\Dto;
 
+/**
+ * Parse and validate a new post entry. Associated images are validated
+ * separately.
+ */
 class PostDto extends Dto
 {
+    // TODO Maybe move image validation to DTO?
     public $content;
 
     function __construct()

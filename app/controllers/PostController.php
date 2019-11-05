@@ -8,6 +8,9 @@ use Lib\Controller;
 
 class PostController extends Controller
 {
+    /**
+     * GET /post/new
+     */
     function get_new()
     {
         // TODO Make this into a centralized security service?
@@ -23,8 +26,12 @@ class PostController extends Controller
         return "post/new";
     }
 
+    /**
+     * POST /post/create
+     */
     function post_create()
     {
+        // Enforce user is logged in
         if (!$this->auth->cur_user)
         {
             return "see:/login";
@@ -39,6 +46,7 @@ class PostController extends Controller
         $uuid = null;
         if (isset($_FILES["postimage"]) && !empty($_FILES["postimage"]["tmp_name"]))
         {
+            // If a file was uploaded validate it and save it
             $file = $_FILES["postimage"];
             if (!exif_imagetype($file["tmp_name"]))
             {
@@ -58,6 +66,7 @@ class PostController extends Controller
 
         if (!is_null($uuid))
         {
+            // If any images were uploaded save them to the post images table
             PostDao::attach_image_to_post($id, $uuid);
         }
 

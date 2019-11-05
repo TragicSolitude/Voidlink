@@ -3,6 +3,9 @@ namespace Lib;
 
 use App\Models\User;
 
+/**
+ * Convenience class for managing user login session
+ */
 class Auth
 {
     public $cur_user;

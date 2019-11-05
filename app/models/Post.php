@@ -1,9 +1,7 @@
 <?php
 namespace App\Models;
 
-use Lib\Model;
-
-class Post extends Model
+class Post
 {
     public $id;
     public $author;

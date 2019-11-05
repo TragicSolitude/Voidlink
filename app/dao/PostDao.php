@@ -8,6 +8,8 @@ use App\Models\User;
 class PostDao extends Dao
 {
     /**
+     * Creates a post and returns the id of the created post
+     *
      * @return The id of the post
      */
     static function create_post(User $author, PostDto $post): int
@@ -28,6 +30,10 @@ class PostDao extends Dao
         return self::$pdo->lastInsertId();
     }
 
+    /**
+     * Attaches an uploaded image to a post by the unique id / filename of the
+     * image
+     */
     function attach_image_to_post(int $post_id, string $uuid)
     {
         $sql = [
@@ -40,6 +46,11 @@ class PostDao extends Dao
         $st->execute();
     }
 
+    /**
+     * Gets posts with images
+     *
+     * @return Array of App\Models\Post
+     */
     static function get_posts(int $count = 25, int $offset = 0): array
     {
         $sql = [

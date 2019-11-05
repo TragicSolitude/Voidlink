@@ -6,6 +6,9 @@ use Lib\Application;
 use Lib\Autoloader;
 use Lib\ViewModel;
 
+/**
+ * Configures the application beyond defaults
+ */
 class Bootstrap extends Application
 {
 	function autoloader_init(): Autoloader

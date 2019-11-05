@@ -1,4 +1,8 @@
 <?php
+    /**
+     * This is the base view and gets rendered on every page
+     */
+
     $pages = [
         "New Post" => "/post/new",
         "Posts" => "/",
