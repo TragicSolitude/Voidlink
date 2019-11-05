@@ -52,19 +52,28 @@ try
                 header("Location: $path");
                 http_response_code(302);
                 break;
+
             // 303 redirect to another page; better semantics for
             // POST-Redirect-GET pattern
             case "see":
                 header("Location: $path");
                 http_response_code(303);
                 break;
+
             // 303 redirect to HTTP_REFERER; mostly used for returning back to
             // a form after an error
             case "go_back":
                 $back = $_SERVER['HTTP_REFERER'] ?: "/";
                 header("Location: $back");
                 http_response_code(303);
-                break;
+                // Do not allow clean up
+                die;
+                // Turns out this "go_back" case works great even if it
+                // incorrectly falls through to the default case because then
+                // the default case has a fatal error where it require()s the
+                // nonexistant $viewpath and prevents cleanup just like the die
+                // does.
+
             // By default just take the returned string as a path to the view
             // to render
             default:
