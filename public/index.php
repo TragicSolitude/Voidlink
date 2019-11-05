@@ -1,5 +1,10 @@
 <?php
 
+// Load libraries. Used only for Google Cloud Storage client library because
+// manually spinning OAuth2.0 for it is unnecessarily hard and likely a huge
+// security flaw.
+include "../vendor/autoload.php";
+
 // Start application bootstrap
 include "../lib/Autoloader.php";
 include "../app/Bootstrap.php";

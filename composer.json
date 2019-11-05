@@ -1,0 +1,13 @@
+{
+    "name": "inthevoid/voidlink",
+    "type": "project",
+    "require": {
+        "google/cloud-storage": "^1.15"
+    },
+    "authors": [
+        {
+            "name": "Noah Shuart",
+            "email": "noahshuart@u.boisestate.edu"
+        }
+    ]
+}
