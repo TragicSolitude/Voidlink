@@ -47,9 +47,17 @@ class RegisterDto extends Dto
         {
             $errors[] = "Please enter a valid email address";
         }
+        else if (strlen($this->email) > 255)
+        {
+            $errors[] = "Email is too long, please enter an email < 255 characters";
+        }
         if (empty($this->username))
         {
             $errors[] = "Please enter a username";
+        }
+        else if (strlen($this->username) > 32)
+        {
+            $errors[] = "Username is too long, username must be < 32 characters";
         }
         if (empty($this->password))
         {

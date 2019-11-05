@@ -28,6 +28,10 @@ class PostDto extends Dto
         {
             $errors[] = "Content is required";
         }
+        else if (strlen($this->content) > 255)
+        {
+            $errors[] = "Content is too long, please keep post under 255 characters";
+        }
 
         return count($errors) > 0;
     }

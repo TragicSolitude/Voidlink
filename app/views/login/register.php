@@ -10,6 +10,7 @@
                 name="email"
                 type="text"
                 class="form-control"
+                maxlength="255"
                 value="<?= $vm->form["email"] ?>" />
         <p>This is only used for correspondance and is not shared</p>
     </div>
@@ -19,6 +20,7 @@
                 name="username"
                 type="text"
                 class="form-control"
+                maxlength="32"
                 value="<?= $vm->form["username"] ?>" />
     </div>
     <div class="form-group">

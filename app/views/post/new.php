@@ -6,7 +6,10 @@
         id="new-post-form">
     <div class="form-group">
         <span class="form-label required">Post Text</span>
-        <textarea name="content" class="form-control"><?= $vm->form["content"] ?></textarea>
+        <textarea
+                name="content"
+                class="form-control"
+                maxlength="255"><?= $vm->form["content"] ?></textarea>
     </div>
     <div class="form-group">
         <span class="form-label">Post Image</span>
