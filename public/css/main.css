@@ -29,9 +29,27 @@
 	vertical-align: middle;
 }
 
+.theme-default .profile-picture {
+    height: 1em;
+    width: 1em;
+    border-radius:1em;
+}
+
 .theme-default #logged-in-user {
     padding: 0 2em 1em;
-    text-align: center;
+}
+
+.theme-default #logged-in-user img {
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 1.5em;
+}
+
+.theme-default #logged-in-user span {
+    height: 1.5em;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.5em;
 }
 
 .theme-default .nav-link {
@@ -101,6 +119,22 @@
 
 .theme-default .post-meta, .theme-default .post-content {
 	margin: 0.2em 0;
+}
+
+.theme-default .post-thumbnails {
+    display: inline-block;
+    height: 5em;
+    float: left;
+}
+
+.theme-default .post-text {
+    display: inline-block;
+}
+
+.theme-default .post-thumbnails + .post-text {
+    max-width: calc(100% - 6em);
+    margin-left: 1em;
+    height: 5em;
 }
 
 .theme-default .post-meta {

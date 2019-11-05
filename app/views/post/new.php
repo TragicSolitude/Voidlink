@@ -1,5 +1,9 @@
 <h1 class="page-title"><?= $vm->page_title ?></h1>
-<form method="POST" action="/post/create" id="new-post-form">
+<form
+        method="POST"
+        action="/post/create"
+        enctype="multipart/form-data"
+        id="new-post-form">
     <div class="form-group">
         <span class="form-label required">Post Text</span>
         <textarea name="content" class="form-control"><?= $vm->form["content"] ?></textarea>

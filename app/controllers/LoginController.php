@@ -3,8 +3,9 @@ namespace App\Controllers;
 
 use Lib\Controller;
 use App\Dto\LoginDto;
-use App\Dao\UserDao;
 use App\Dto\RegisterDto;
+use App\Dao\UserDao;
+use App\Dao\ImageDao;
 
 class LoginController extends Controller
 {
@@ -67,7 +68,25 @@ class LoginController extends Controller
             return "go_back";
         }
 
-        if (!UserDao::register_user($login))
+        $uuid = null;
+        if (isset($_FILES["profilepic"]) && !empty($_FILES["profilepic"]["tmp_name"]))
+        {
+            $file = $_FILES["profilepic"];
+            if (!exif_imagetype($file["tmp_name"]))
+            {
+                $this->errors[] = "Invalid image";
+                return "go_back";
+            }
+
+            $uuid = ImageDao::upload_image($file["tmp_name"]);
+            if (is_null($uuid))
+            {
+                $this->errors[] = "Error uploading image";
+                return "go_back";
+            }
+        }
+
+        if (!UserDao::register_user($login, $uuid))
         {
             $this->errors[] = "Unknown error occurred";
             return "go_back";

@@ -31,8 +31,12 @@ class Bootstrap extends Application
 
     function vm_init(): ViewModel
     {
-        return parent::vm_init()
+        $vm = parent::vm_init()
             ->add_stylesheet("main.css");
+
+        $vm->imgurl = $this->config->image_base_url;
+
+        return $vm;
     }
 
     function pdo_init(): \PDO

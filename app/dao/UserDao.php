@@ -62,7 +62,7 @@ class UserDao extends Dao
         return $count === 0;
     }
 
-    static function register_user(RegisterDto $registration): bool
+    static function register_user(RegisterDto $registration, ?string $uuid = null): bool
     {
         // DB Column is 60 wide specifically for Bcrypt hash
         $hash = password_hash(
@@ -72,13 +72,14 @@ class UserDao extends Dao
         );
 
         $sql = [
-            "INSERT INTO user (email, username, password, role)",
-                "VALUES (:email, :username, :password, 1)"
+            "INSERT INTO user (email, username, password, role, profile_picture)",
+                "VALUES (:email, :username, :password, 1, :profilepic)"
         ];
         $st = self::$pdo->prepare(implode(" ", $sql));
         $st->bindValue(":email", $registration->email);
         $st->bindValue(":username", $registration->username);
         $st->bindValue(":password", $hash);
+        $st->bindValue(":profilepic", $uuid);
         return $st->execute();
     }
 }

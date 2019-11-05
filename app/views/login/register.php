@@ -1,5 +1,9 @@
 <h1 class="page-title"><?= $vm->page_title ?></h1>
-<form method="POST" action="/login/doregister" id="login-form">
+<form
+        method="POST"
+        action="/login/doregister"
+        enctype="multipart/form-data"
+        id="login-form">
     <div class="form-group">
         <span class="form-label required">Email</span>
         <input

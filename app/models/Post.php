@@ -10,4 +10,5 @@ class Post extends Model
     public $author_name;
     public $content;
     public $created;
+    public $image;
 }

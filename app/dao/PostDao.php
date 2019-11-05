@@ -7,7 +7,10 @@ use App\Models\User;
 
 class PostDao extends Dao
 {
-    static function create_post(User $author, PostDto $post)
+    /**
+     * @return The id of the post
+     */
+    static function create_post(User $author, PostDto $post): int
     {
         $sql = [
             "INSERT INTO post (author, author_name, content)",
@@ -17,19 +20,32 @@ class PostDao extends Dao
         $st->bindValue(":author", $author->id, \PDO::PARAM_INT);
         $st->bindValue(":author_name", $author->username);
         $st->bindValue(":content", $post->content);
-        $st->execute();
+        if (!$st->execute())
+        {
+            throw new \PDOException("Error creating post", -1);
+        }
+
+        return self::$pdo->lastInsertId();
     }
 
-    // function attach_images_to_post(string $post_id, array $images)
-    // {
-
-    // }
+    function attach_image_to_post(int $post_id, string $uuid)
+    {
+        $sql = [
+            "INSERT INTO post_image (uuid, post_id)",
+                "VALUES (:uuid, :post_id)"
+        ];
+        $st = self::$pdo->prepare(implode(" ", $sql));
+        $st->bindValue(":uuid", $uuid);
+        $st->bindValue(":post_id", $post_id, \PDO::PARAM_INT);
+        $st->execute();
+    }
 
     static function get_posts(int $count = 25, int $offset = 0): array
     {
         $sql = [
-            "SELECT *",
+            "SELECT *, uuid AS image",
             "FROM post",
+            "LEFT OUTER JOIN post_image ON post.id = post_image.post_id",
             "ORDER BY created",
             "LIMIT :offset, :count"
         ];

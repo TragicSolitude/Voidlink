@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Dao\ImageDao;
 use App\Dao\PostDao;
 use App\Dto\PostListDto;
 use Lib\Controller;
@@ -63,9 +64,4 @@ class IndexController extends Controller
 
         return "index/sitemap";
     }
-
-	function get_test()
-	{
-		return ['thing' => 3];
-	}
 }

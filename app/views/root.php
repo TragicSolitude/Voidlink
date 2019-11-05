@@ -31,7 +31,10 @@
         </h1>
         <?php if (!empty($vm->cur_user)): ?>
         <div id="logged-in-user">
-            Welcome <?= $vm->cur_user->username ?>
+            <?php if (!empty($vm->cur_user->profile_picture)): ?>
+            <img src="<?= $vm->imgurl . $vm->cur_user->profile_picture ?>" />
+            <?php endif; ?>
+            <span>Welcome <?= $vm->cur_user->username ?></span>
         </div>
         <?php endif; ?>
         <nav>

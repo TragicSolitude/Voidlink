@@ -3,6 +3,9 @@
 // Load libraries. Used only for Google Cloud Storage client library because
 // manually spinning OAuth2.0 for it is unnecessarily hard and likely a huge
 // security flaw.
+//
+// Hosting runs the site stateless so images must be saved on an external
+// service
 include "../vendor/autoload.php";
 
 // Start application bootstrap
