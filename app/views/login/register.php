@@ -53,7 +53,12 @@
     <?php endforeach; ?>
     </div>
     <div class="form-action">
-        <button class="form-button primary" type="submit">Register</button>
+        <button
+                id="submit-btn"
+                class="form-button primary"
+                type="submit">
+            Register
+        </button>
         <a class="form-button" href="/">Cancel</a>
     </div>
 </form>

@@ -23,6 +23,7 @@
 <html>
 <head>
     <title><?= $vm->page_title ?></title>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
     <?php $vm->stylesheets(); ?>
 </head>
 <body class="theme-default">

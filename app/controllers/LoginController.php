@@ -66,6 +66,9 @@ class LoginController extends Controller
         $this->vm->page_title = "Register";
         $this->vm->errors = $this->errors;
 
+        $this->vm->add_script("jquery-3.4.1.min.js");
+        $this->vm->add_script("registration-validate.js");
+
         return "login/register";
     }
 
